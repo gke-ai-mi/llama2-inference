@@ -8,7 +8,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM,TextItera
 import huggingface_hub
 from threading import Thread
 
-huggingface_hub.login(token="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") ## Add your HF credentials
+huggingface_hub.login(token="XXXX") ## Add your HF credentials
 
 class TritonPythonModel:
     def initialize(self, args):
