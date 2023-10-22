@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build Image
+  entrypoint: bash
+  args:
+    - -c
+    - |
+      docker build . -t gcr.io/triton-inference-llama2:latest \
+      && docker push gcr.io/triton-inference-llama2:latest
+ 
+images:
+- 'gcr.io/triton-inference-llama2:latest'
