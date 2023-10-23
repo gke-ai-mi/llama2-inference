@@ -25,8 +25,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
-USER triton-server
-WORKDIR /home/triton-server
+WORKDIR /home/triton-server/app
 RUN python3 -m pip install --user virtualenv
 RUN python3 -m venv triton-server
 RUN source triton-server/bin/activate
