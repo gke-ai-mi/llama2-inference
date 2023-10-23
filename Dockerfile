@@ -5,4 +5,4 @@ COPY requirements.txt ./
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt
 
-COPY ../model_repository/llamav2 ./llamav2
+COPY model_repository/llamav2 ./llamav2
