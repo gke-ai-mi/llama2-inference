@@ -34,7 +34,7 @@ spec:
           args:
            - |
              tritonserver --model-store=gs://triton_sample_models/23_06 --strict-model-config=False --log-verbose=0 --allow-gpu-metrics=True
-          workingDir: /home/triton-server
+          workingDir: /home/triton-server/app
           ports:
             - containerPort: 8000
               name: http
