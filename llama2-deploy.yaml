@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: triton-inference-server
+  labels:
+    app: triton-inference-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: triton-inference-server
+  template:
+    metadata:
+      labels:
+        app: triton-inference-server
+    spec:
+      containers:
+        - name: triton-inference-server
+          image: us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/vllama2
+          imagePullPolicy: IfNotPresent
+
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+
+          args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository"]
+
+          ports:
+            - containerPort: 8000
+              name: http
+            - containerPort: 8001
+              name: grpc
+            - containerPort: 8002
+              name: metrics
+          livenessProbe:
+            httpGet:
+              path: /v2/health/live
+              port: http
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /v2/health/ready
+              port: http
+
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
