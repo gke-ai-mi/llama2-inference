@@ -28,4 +28,4 @@ FROM nvcr.io/nvidia/tritonserver:23.09-py3
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install vllm==0.2.0
 RUN python3 -m pip install huggingface_hub
-
+RUN python3 -m pip install xformers==0.0.22

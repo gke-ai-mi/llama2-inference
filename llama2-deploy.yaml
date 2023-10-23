@@ -29,7 +29,7 @@ spec:
             - name: LD_PRELOAD
               value: ''
             - name: TRANSFORMERS_CACHE
-              value: /home/tritonserver
+              value: /home/triton-server/.cache
           args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
                  "--strict-model-config=False",
                  "--log-verbose=0",
@@ -64,5 +64,5 @@ spec:
           securityContext:
             runAsUser: 1000
           volumeMounts:
-            - mountPath: /home/tritonserver
+            - mountPath: /home/triton-server
               name: cache
