@@ -65,5 +65,5 @@ spec:
           securityContext:
             runAsUser: 1000
           volumeMounts:
-            - mountPath: /home/triton-server
+            - mountPath: /home/triton-server/.cache
               name: cache
