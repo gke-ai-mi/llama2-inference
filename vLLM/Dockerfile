@@ -25,5 +25,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
-RUN pip install vllm==0.2.0
-RUN pip install huggingface_hub
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install vllm==0.2.0
+RUN pip3 install huggingface_hub
+
