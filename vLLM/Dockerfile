@@ -25,11 +25,12 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
-RUN apt install python3.10-venv
-WORKDIR /workspace
+USER triton-user
+WORKDIR /home/triton-server
+RUN python3 -m pip install --user virtualenv
 RUN python3 -m venv triton-server
 RUN source triton-server/bin/activate
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install vllm==0.2.0
-RUN python3 -m pip install huggingface_hub
-RUN python3 -m pip install xformers==0.0.22
+RUN python3 -m pip install --user --upgrade pip
+RUN python3 -m pip install --user vllm==0.2.0
+RUN python3 -m pip install --user huggingface_hub
+RUN python3 -m pip install --user xformers==0.0.22
