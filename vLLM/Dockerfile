@@ -25,6 +25,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
+RUN sudo apt install python3.10-venv
 WORKDIR /workspace
 RUN python3 -m venv triton-server
 RUN source triton-server/bin/activate
