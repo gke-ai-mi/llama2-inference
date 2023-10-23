@@ -26,7 +26,7 @@
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
 WORKDIR /workspace
-RUN python3 -m triton-server
+RUN python3 -m venv triton-server
 RUN triton-server/bin/activate
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install vllm==0.2.0

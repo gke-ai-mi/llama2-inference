@@ -30,11 +30,11 @@ spec:
               value: ''
             - name: TRANSFORMERS_CACHE
               value: /home/triton-server/.cache
-          args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
-                 "--strict-model-config=False",
-                 "--log-verbose=0",
-                 "--allow-gpu-metrics=True"]
-
+          command: ["sh", "-c"]
+          args:
+           - |
+             tritonserver --model-store=gs://triton_sample_models/23_06 --strict-model-config=False --log-verbose=0 --allow-gpu-metrics=True
+          workingDir: /workspace
           ports:
             - containerPort: 8000
               name: http
