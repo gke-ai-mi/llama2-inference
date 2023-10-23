@@ -14,16 +14,26 @@ spec:
       labels:
         app: triton-inference-server
     spec:
+      volumes:
+       - name: cache
+         emptyDir: {}
       containers:
         - name: triton-inference-server
-          image: us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/vllama2
+          image: us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/vllama2:latest
           imagePullPolicy: IfNotPresent
 
           resources:
             limits:
-              nvidia.com/gpu: "1"
-
-          args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository"]
+              nvidia.com/gpu: 1
+          env:
+            - name: LD_PRELOAD
+              value: ''
+            - name: TRANSFORMERS_CACHE
+              value: /home/tritonserver
+          args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
+                 "--strict-model-config=False",
+                 "--log-verbose=0",
+                 "--allow-gpu-metrics=True"]
 
           ports:
             - containerPort: 8000
@@ -36,13 +46,23 @@ spec:
             httpGet:
               path: /v2/health/live
               port: http
-          readinessProbe:
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 5
+            timeoutSeconds: 60
+            successThreshold: 1
+            failureThreshold: 1
+          readinessProbe:
             httpGet:
               path: /v2/health/ready
               port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 60
+            successThreshold: 1
+            failureThreshold: 1
 
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+          securityContext:
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /home/tritonserver
+              name: cache
