@@ -33,6 +33,7 @@ spec:
           command: ["sh", "-c"]
           args:
            - |
+             
              tritonserver --model-store=gs://triton_sample_models/23_06 --strict-model-config=False --log-verbose=0 --allow-gpu-metrics=True
           workingDir: /workspace
           ports:
