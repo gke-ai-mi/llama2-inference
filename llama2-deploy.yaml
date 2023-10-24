@@ -35,7 +35,7 @@ spec:
                  "--log-verbose=1",
                  "--allow-gpu-metrics=True"]
 
-          workingDir: /home/triton-server/
+          workingDir: /home/triton-server/app
           ports:
             - containerPort: 8000
               name: http
