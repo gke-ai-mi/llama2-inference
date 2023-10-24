@@ -51,7 +51,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 5
-            timeoutSeconds: 60
+            timeoutSeconds: 600
             successThreshold: 1
             failureThreshold: 1
           readinessProbe:
@@ -60,7 +60,7 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 5
-            timeoutSeconds: 60
+            timeoutSeconds: 600
             successThreshold: 1
             failureThreshold: 1
 
