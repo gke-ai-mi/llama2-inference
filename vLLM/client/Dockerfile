@@ -27,7 +27,7 @@
 FROM nvcr.io/nvidia/tritonserver:23.08-py3-sdk
 WORKDIR /workspace
 
-COPY client ./
+COPY client.py ./
 COPY prompts.txt ./
 
 
