@@ -26,9 +26,10 @@
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
 RUN mkdir -p /home/triton-server
-WORKDIR /home/triton-server/app
+WORKDIR /home/triton-server/
 RUN python3 -m pip install --user --upgrade pip
 RUN python3 -m pip install --user vllm==0.2.0
 RUN python3 -m pip install --user huggingface_hub
 RUN python3 -m pip install --user xformers==0.0.22
-COPY . /home/triton-server/app
+COPY . .
+COPY /root/.local/lib/python3.10/site-packages .
