@@ -32,6 +32,6 @@ RUN python3 -m pip install --user vllm==0.2.0
 RUN python3 -m pip install --user huggingface_hub
 RUN python3 -m pip install --user xformers==0.0.22
 COPY . .
-
+FROM nvcr.io/nvidia/tritonserver:23.09-py3 
 COPY --from=builder /home/triton-server/app/.local /home/triton-server/app/.local
 
