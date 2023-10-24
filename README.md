@@ -1,9 +1,37 @@
 # llama2-inference
 
-Serving Llama 2 models on GKE GPUs through Nvidia Inference Server
+Serving Llama 2 models on GKE GPUs through Nvidia Triton Inference Server
+
+Triton Inference Server
+
+Triton Inference Server enables teams to deploy any AI model from multiple deep learning and machine learning frameworks, including TensorRT, TensorFlow, PyTorch, ONNX, OpenVINO, Python, RAPIDS FIL, and more. Triton supports inference across cloud, data center, edge and embedded devices on NVIDIA GPUs, x86 and ARM CPU, or AWS Inferentia. Triton Inference Server delivers optimized performance for many query types, including real time, batched, ensembles and audio/video streaming. Triton inference Server is part of NVIDIA AI Enterprise, a software platform that accelerates the data science pipeline and streamlines the development and deployment of production AI.
+
+Major features include:
+
+Supports multiple deep learning frameworks
+
+Supports multiple machine learning frameworks
+
+Concurrent model execution
+
+Dynamic batching
+
+Sequence batching and implicit state management for stateful models
+
+Provides Backend API that allows adding custom backends and pre/post processing operations
+
+Model pipelines using Ensembling or Business Logic Scripting (BLS)
+
+HTTP/REST and GRPC inference protocols based on the community developed KServe protocol
+
+A C API and Java API allow Triton to link directly into your application for edge and other in-process use cases
+
+Metrics indicating GPU utilization, server throughput, server latency, and more
+
+
 
 ## Summary:
-This tutorial walks through how to setup Llama2 and other hugging face based LLM models through Nvidia Inference Server based on GKE and GPU(Nvidia T4, L4 etc)
+This tutorial walks through how to setup Llama2 and other hugging face based LLM models through Nvidia Inference Server based on GKE and GPU(Nvidia T4, L4 etc) and vLLM engine
 
 ## Tutorial steps:
 
