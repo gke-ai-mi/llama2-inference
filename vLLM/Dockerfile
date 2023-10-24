@@ -25,8 +25,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3
-USER triton-server
-WORKDIR /home/triton-server/app
+WORKDIR /home/triton-server
 RUN python3 -m pip install --user --upgrade pip
 RUN python3 -m pip install --user vllm==0.2.0
 RUN python3 -m pip install --user huggingface_hub

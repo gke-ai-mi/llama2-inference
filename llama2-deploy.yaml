@@ -30,6 +30,8 @@ spec:
               value: ''
             - name: TRANSFORMERS_CACHE
               value: /home/triton-server/.cache
+            - name: PATH
+              value: /home/triton-server/app/.local/bin
           command: ["sh", "-c"]
           args:
            - |
