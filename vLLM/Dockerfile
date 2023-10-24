@@ -34,5 +34,5 @@ RUN python3 -m pip install --user xformers==0.0.22
 COPY . .
 FROM nvcr.io/nvidia/tritonserver:23.09-py3 
 WORKDIR /home/triton-server/app/.local
-COPY --from=builder /home/triton-server/app/.local /home/triton-server/app/.local
+COPY --from=builder /root/.local /home/triton-server/app/.local
 
