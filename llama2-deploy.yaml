@@ -30,13 +30,12 @@ spec:
               value: ''
             - name: TRANSFORMERS_CACHE
               value: /home/triton-server/.cache
-            - name: PATH
-              value: /home/triton-server/app/.local/bin
-          command: ["sh", "-c"]
-          args:
-           - |
-             tritonserver --model-store=gs://triton_sample_models/23_06 --strict-model-config=False --log-verbose=0 --allow-gpu-metrics=True
-          workingDir: /home/triton-server/app
+          args: ["tritonserver", "--model-store=gs://triton_sample_models/23_06",
+                 "--strict-model-config=False",
+                 "--log-verbose=1",
+                 "--allow-gpu-metrics=True"]
+
+          workingDir: /home/triton-server/
           ports:
             - containerPort: 8000
               name: http
