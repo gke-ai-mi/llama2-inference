@@ -25,15 +25,13 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FROM nvcr.io/nvidia/tritonserver:23.09-py3 as builder
-RUN mkdir -p /home/triton-server
-WORKDIR /home/triton-server/
+RUN mkdir -p /home/triton-server/app
+WORKDIR /home/triton-server/app
 RUN python3 -m pip install --user --upgrade pip
 RUN python3 -m pip install --user vllm==0.2.0
 RUN python3 -m pip install --user huggingface_hub
 RUN python3 -m pip install --user xformers==0.0.22
 COPY . .
 
-FROM nvcr.io/nvidia/tritonserver:23.09-py3 
-WORKDIR /home/triton-server/
-COPY --from=builder /root/.local /home/triton-server/.local
+COPY --from=builder /home/triton-server/app/.local /home/triton-server/app/.local
 
