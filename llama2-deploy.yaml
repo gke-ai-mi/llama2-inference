@@ -30,6 +30,8 @@ spec:
               value: ''
             - name: TRANSFORMERS_CACHE
               value: /home/triton-server/.cache
+            - name: PYTHONPATH
+              value: /home/triton-server/app/.local/lib/python3.10/site-packages
           args: ["tritonserver", "--model-store=gs://triton_sample_models/23_06",
                  "--strict-model-config=False",
                  "--log-verbose=1",
