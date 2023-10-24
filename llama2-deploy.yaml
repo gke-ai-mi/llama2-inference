@@ -32,7 +32,9 @@ spec:
               value: /home/triton-server/.cache
             - name: PYTHONPATH
               value: /home/triton-server/app/.local/lib/python3.10/site-packages:/opt/tritonserver/backends/python
-          args: ["tritonserver", "--model-store=gs://triton_sample_models/23_06",
+            - name: shm-size
+              value: 1g
+          args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
                  "--strict-model-config=False",
                  "--log-verbose=1",
                  "--allow-gpu-metrics=True"]
@@ -49,20 +51,18 @@ spec:
             httpGet:
               path: /v2/health/live
               port: http
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 600
+            initialDelaySeconds: 180
+            periodSeconds: 10
             successThreshold: 1
-            failureThreshold: 1
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /v2/health/ready
               port: http
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 600
+            initialDelaySeconds: 180
+            periodSeconds: 10
             successThreshold: 1
-            failureThreshold: 1
+            failureThreshold: 3
 
           securityContext:
             runAsUser: 1000
