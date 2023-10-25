@@ -39,6 +39,8 @@ spec:
                 secretKeyRef:
                   name: llama2
                   key: HF_TOKEN
+            - name: NCCL_IGNORE_DISABLED_P2P
+              value: '1'
           args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
                  "--strict-model-config=False",
                  "--log-verbose=1",
