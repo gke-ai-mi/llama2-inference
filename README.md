@@ -75,8 +75,8 @@ gcloud builds submit .
 ### Deploy kubernetes resources into GKE cluster
 
 ```
-export HF_TOKEN=<paste-your-own-token>
 gcloud container clusters get-credentials llama2-inference-cluster --zone us-west1-b
+export HF_TOKEN=<paste-your-own-token>
 kubectl create secret generic llama2 --from-literal="HF_TOKEN=$HF_TOKEN"
 kubectl apply -f llama2-gke-deploy.yaml -n triton
 ```

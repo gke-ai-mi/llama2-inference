@@ -13,7 +13,7 @@ from vllm.utils import random_uuid
 import huggingface_hub
 
 _VLLM_ENGINE_ARGS_FILENAME = "vllm_engine_args.json"
-huggingface_hub.login(token=os.environ.get('HF_TOKEN', '')) ## Add your HF credentials
+huggingface_hub.login(token=os.environ.get('HUGGING_FACE_TOKEN', '')) ## Add your HF credentials
 
 
 class TritonPythonModel:
