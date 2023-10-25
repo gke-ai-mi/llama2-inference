@@ -34,6 +34,11 @@ spec:
               value: /home/triton-server/app/.local/lib/python3.10/site-packages:/opt/tritonserver/backends/python
             - name: shm-size
               value: 1g
+            - name: HUGGING_FACE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: llama2
+                  key: HF_TOKEN
           args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository",
                  "--strict-model-config=False",
                  "--log-verbose=1",
