@@ -1,8 +1,10 @@
 # for tesla-t4
 #gcloud container clusters create llama2-inference-cluster --num-nodes=1 --min-nodes=1 --max-nodes=3    --zone=us-west1-b     --accelerator="type=nvidia-tesla-t4,count=2,gpu-driver-version=latest"  --machine-type="n1-standard-8"  --enable-private-nodes --master-ipv4-cidr 172.16.0.32/28  --enable-ip-alias --scopes="gke-default,storage-rw"
 
+#tesla-l4:
+#gcloud container clusters create llama2-inference-cluster --num-nodes=1 --min-nodes=1 --max-nodes=3  --zone=us-central1-a     --accelerator="type=nvidia-l4,count=2,gpu-driver-version=default"  --machine-type="g2-standard-24" --enable-ip-alias --scopes="gke-default,storage-rw"
 
-# for L4
+# for L4 and spot private cluster
 export REGION=us-west1
 export PROJECT_ID=$(gcloud config get project)
 
