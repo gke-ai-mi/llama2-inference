@@ -5,7 +5,7 @@
 #gcloud container clusters create llama2-inference-cluster --num-nodes=1 --min-nodes=1 --max-nodes=3  --zone=us-central1-a     --accelerator="type=nvidia-l4,count=2,gpu-driver-version=default"  --machine-type="g2-standard-24" --enable-ip-alias --scopes="gke-default,storage-rw"
 
 # for L4 and spot private cluster
-export REGION=us-west1
+export REGION=us-centra1
 export PROJECT_ID=$(gcloud config get project)
 
 gcloud container clusters create llm-inference-t4 --location ${REGION} \
