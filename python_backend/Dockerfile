@@ -85,4 +85,5 @@ WORKDIR /home/triton-server/app
 COPY requirements.txt ./
 RUN python3 -m pip install  --user --upgrade pip
 RUN python3 -m pip install  --user -r requirements.txt
-RUN chown triton-server:triton-server /usr/local/nvidia/lib
+WORKDIR /usr/local/nvidia
+COPY --chown=1000:1000 --from=full /usr/local/nvidia/lib /usr/local/nvidia/lib
