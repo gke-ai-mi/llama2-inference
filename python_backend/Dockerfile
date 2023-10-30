@@ -6,7 +6,7 @@ ARG TRITON_CONTAINER_VERSION=23.10
 
 FROM nvcr.io/nvidia/tritonserver:23.10-py3 AS full
 
-FROM nvcr.io/nvidia/tritonserver:23.10-py3-min
+FROM nvcr.io/nvidia/tritonserver:23.10-py3-min as builder
 
 ARG TRITON_VERSION
 ARG TRITON_CONTAINER_VERSION
@@ -85,5 +85,6 @@ WORKDIR /home/triton-server/app
 COPY requirements.txt ./
 RUN python3 -m pip install  --user --upgrade pip
 RUN python3 -m pip install  --user -r requirements.txt
+COPY --chown=1000:1000 /root/.local /home/triton-server/app/.local
 #WORKDIR /usr/local/nvidia
 #COPY --chown=1000:1000 --from=full /usr/local/nvidia/lib /usr/local/nvidia/lib
