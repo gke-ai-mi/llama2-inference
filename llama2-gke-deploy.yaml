@@ -17,6 +17,8 @@ spec:
       volumes:
        - name: cache
          emptyDir: {}
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-l4
       containers:
         - name: triton-inference-server
           image: us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/llama2:latest

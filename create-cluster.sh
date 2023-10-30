@@ -25,4 +25,15 @@ gcloud container clusters create llm-inference-t4 --location ${REGION} \
   --master-ipv4-cidr 172.16.0.32/28 \
   --scopes="gke-default,storage-rw"
 
-gcloud container node-pools create g2-standard-24 --cluster llama-inference-t4  --accelerator type=nvidia-l4,count=2,gpu-driver-version=latest   --machine-type g2-standard-24   --ephemeral-storage-local-ssd=count=2   --enable-autoscaling --enable-image-streaming   --num-nodes=0 --min-nodes=0 --max-nodes=3   --shielded-secure-boot   --shielded-integrity-monitoring   --node-locations $REGION-a,$REGION-b --region $REGION --spot
+
+gcloud container node-pools create g2-standard-24 --cluster llm-inference-t4  --accelerator type=nvidia-l4,count=2,gpu-driver-version=latest   --machine-type g2-standard-24   --ephemeral-storage-local-ssd=count=2   --enable-autoscaling --enable-image-streaming   --num-nodes=0 --min-nodes=0 --max-nodes=3   --shielded-secure-boot   --shielded-integrity-monitoring   --node-locations $REGION-a,$REGION-b --region $REGION --spot
+
+kubectl create ns triton
+kubectl create serviceaccount triton --namespace triton
+gcloud iam service-accounts add-iam-policy-binding triton-server@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:${PROJECT_ID}.svc.id.goog[triton/triton]"
+
+kubectl annotate serviceaccount triton \
+    --namespace triton \
+    iam.gke.io/gcp-service-account=triton-server@${PROJECT_ID}.iam.gserviceaccount.com
