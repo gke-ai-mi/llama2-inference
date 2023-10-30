@@ -24,7 +24,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-FROM nvcr.io/nvidia/tritonserver:23.09-py3 as builder
+FROM nvcr.io/nvidia/tritonserver:23.10-py3 as builder
 RUN mkdir -p /home/triton-server/app
 WORKDIR /home/triton-server/app
 RUN python3 -m pip install --user --upgrade pip
