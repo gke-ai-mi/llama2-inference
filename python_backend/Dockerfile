@@ -66,7 +66,7 @@ COPY --chown=1000:1000 --from=full /opt/tritonserver/bin bin/
 COPY --chown=1000:1000 --from=full /opt/tritonserver/lib lib/
 COPY --chown=1000:1000 --from=full /opt/tritonserver/include include/
 # Copying over backends 
-COPY --chown=1000:1000 --from=full /opt/tritonserver/backends/tensorflow1 /opt/tritonserver/backends/tensorflow1
+COPY --chown=1000:1000 --from=full /opt/tritonserver/backends /opt/tritonserver/backends
 
 # Top-level /opt/tritonserver/backends not copied so need to explicitly set permissions here
 RUN chown triton-server:triton-server /opt/tritonserver/backends
