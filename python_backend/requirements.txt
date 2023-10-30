@@ -5,3 +5,4 @@ huggingface_hub
 accelerate
 bitsandbytes
 scipy
+xformers==0.0.22
