@@ -37,7 +37,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Common dependencies. FIXME (can any of these be conditional? For
 # example libcurl only needed for GCS?)
-RUN apt-get update &&     apt-get install -y --no-install-recommends             software-properties-common             libb64-0d             libcurl4-openssl-dev             libre2-9             git             gperf             dirmngr             libgoogle-perftools-dev             libnuma-dev             curl             libjemalloc-dev              &&     rm -rf /var/lib/apt/lists/*
+RUN apt-get update &&     apt-get install -y --no-install-recommends             software-properties-common             libb64-0d             libcurl4-openssl-dev             libre2-9             git             gperf             dirmngr             libgoogle-perftools-dev             libnuma-dev             curl             libjemalloc-dev      python3-pip        &&     rm -rf /var/lib/apt/lists/*
 
 # Set TCMALLOC_RELEASE_RATE for users setting LD_PRELOAD with tcmalloc
 ENV TCMALLOC_RELEASE_RATE 200
