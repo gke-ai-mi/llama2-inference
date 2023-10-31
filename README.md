@@ -50,29 +50,29 @@ update the create-cluster.sh script with write parameters, and provision GKE clu
 ./create-cluster.sh
 ```
 ### Update and upload the Llama 2 Model repository files.
-Update model.py file under model_repository/vllm/1/model.py:
-In line 16, update huggingface API token you get from your Huggingface account settings. You also need to have access permission granted for Llama2 LLM models. 
+
 
 Run the following commands to upload model repository, replace your-bucket-name
 ```
 gsutil mb gs://your-bucket-name
-gsutil cp model_repository/vllm -r gs://your-bucket-name/model_repository/vllm
+gsutil cp model_repository/llama2 -r gs://your-bucket-name/model_repository/llama2
 ```
 
 ### Run cloud build to create container images:
 1 Create a Artifact Registry repo, us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm 
 2 Run following command to build Llama2 Inference container through vLLM engine,
 ```
-cd vLLM
+cd python-backend
 gcloud builds submit .
 ```
 3 Run following command to build testing client container to test llama 2 batch inference:
 
 ```
-cd vLLM/client
+cd python-backend/client
 gcloud builds submit .
 ```
 ### Deploy kubernetes resources into GKE cluster
+Execute the command to deploy inference deployment in GKE, update the HF_TOKEN values
 
 ```
 gcloud container clusters get-credentials llama2-inference-cluster --zone us-west1-b
@@ -82,7 +82,7 @@ kubectl apply -f llama2-gke-deploy.yaml -n triton
 ```
 ### Test out the batch inference:
 ```
-kubectl run -it --images us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/vllm-client bash 
+kubectl run -it --images us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/llama22-client bash 
 ```
 
 Once you in the container, update the client.py with the endpoint with the Service IP of generated. 
