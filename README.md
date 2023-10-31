@@ -31,7 +31,7 @@ Metrics indicating GPU utilization, server throughput, server latency, and more
 
 
 ## Summary:
-This tutorial walks through how to setup Llama2 and other hugging face based LLM models through Nvidia Inference Server based on GKE and GPU(Nvidia T4, L4 etc) and vLLM engine
+This tutorial walks through how to setup Llama2 and other hugging face based LLM models through Nvidia Inference Server based on GKE and GPU(Nvidia T4, L4 etc)
 
 ## Tutorial steps:
 
@@ -92,7 +92,8 @@ python3 client.py
 ```
 If everything runs smoothly, there will be a results.txt file generated, you may check the contents of 
 
-
+### Note for vLLM:
+vLLM has been tested out, it may have better performance for small models. But it uses 16bit by default, does not support Quardzation with 8bit yet( which supported by the python_backend one). Through the tests, vLLM can support T4 GPU for Llama2 7b model, but not the L4 GPU for Llama 2 13b model due to lack of 8bit( load_in_8bit= True)
 
 
 
