@@ -10,5 +10,5 @@ RUN python3 -m pip install  --user -r requirements.txt
 FROM nvcr.io/nvidia/tritonserver:23.10-py3 
 WORKDIR /home/triton-server/app/.local
 COPY --from=builder /root/.local /home/triton-server/app/.local
-ENV LD_LIBRARY_PATH /home/triton-server/app/.local/bin:/home/triton-server/app/.local/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /home/triton-server/app/.local/bin:/home/triton-server/app/.local/lib:/opt/hpcx/ucc/lib/:/opt/hpcx/ucx/lib/:/opt/tritonserver/backends/onnxruntime:/usr/local/cuda/compat/lib:/usr/local/cuda/lib64
 
