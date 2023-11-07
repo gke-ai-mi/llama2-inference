@@ -1,4 +1,5 @@
 {
     "model":"meta-llama/Llama-2-7b-chat-hf",
-    "disable_log_requests": "true"
+    "disable_log_requests": "true",
+    "tensor_parallel_size": 2
 }
