@@ -2,16 +2,25 @@ from tritonclient.utils import *
 import tritonclient.http as httpclient
 import time
 import numpy as np
+from os import system
 
 tm1 = time.perf_counter()
+input_text=[]
+with open("prompts.txt", "r") as file:
+        prompts = file.readlines()
+        for line in prompts:
+           line_arr=[]
+           line_arr.append(line)
+           input_text.append(line_arr)
+        print(f'Input: {len(input_text)}')
 with httpclient.InferenceServerClient(url="localhost:8000", verbose=False, concurrency=32) as client:
     
     # Define input config
-    input_text =[["Where is Uruguay?"],
-                 ["Who is George Washington?"],
-                 ["Who is Lionel Messi?"],
-                 ]
-                  
+    #input_text =[["Where is Uruguay?"],
+    #             ["Who is George Washington?"],
+    #             ["Who is Lionel Messi?"],
+    #             ]
+                
     text_obj = np.array(input_text, dtype="object")
 
     inputs = [
