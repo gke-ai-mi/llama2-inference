@@ -16,6 +16,7 @@ class TritonPythonModel:
         self.model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-13b-chat-hf", 
                                                           load_in_8bit= False, 
                                                           torch_dtype=torch.float16, 
+                                                          use_safetensors=False,
                                                           device_map='auto')
         self.model.resize_token_embeddings(len(self.tokenizer))
 
