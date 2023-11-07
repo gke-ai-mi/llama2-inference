@@ -36,7 +36,7 @@ This tutorial walks through how to setup Llama2 and other hugging face based LLM
 ## Tutorial steps:
 
 ### Prerequisites
-Huggingface account settings. You also need to have access permission granted for Llama2 LLM models. 
+Huggingface account settings with HF API Token. You also need to have access permission granted for Llama2 LLM models. 
 GCP project and access
 ### Download the github repo, https://github.com/gke-ai-mi/llama2-inference/
 ```
@@ -46,11 +46,16 @@ chmod +x create-cluster.sh
 ```
 ### Create the GKE cluster
 update the create-cluster.sh script with write parameters, and provision GKE cluster
+comment out the following lines if you need public instead of private cluster:
+  --enable-ip-alias \
+  --enable-private-nodes  \
+  --master-ipv4-cidr 172.16.0.32/28 \
+  --scopes="gke-default,storage-rw"
+
 ```
 ./create-cluster.sh
 ```
 ### Update and upload the Llama 2 Model repository files.
-
 
 Run the following commands to upload model repository, replace your-bucket-name
 ```
@@ -72,6 +77,9 @@ cd python-backend/client
 gcloud builds submit .
 ```
 ### Deploy kubernetes resources into GKE cluster
+Update the following line in llama2-gke-deploy.yaml file, with your model repository URI in cloud storage:
+ 
+args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository"
 Execute the command to deploy inference deployment in GKE, update the HF_TOKEN values
 
 ```
