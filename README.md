@@ -82,7 +82,7 @@ kubectl apply -f llama2-gke-deploy.yaml -n triton
 ```
 ### Test out the batch inference:
 ```
-kubectl run -it --images us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/llama22-client bash 
+kubectl run -it -n triton --image us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/llama2-client bash 
 ```
 
 Once you in the container, update the client.py with the endpoint with the Service IP of generated. 
