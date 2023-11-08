@@ -4,7 +4,7 @@ import queue
 import sys
 from os import system
 import json
-
+import time
 import numpy as np
 import tritonclient.grpc.aio as grpcclient
 from tritonclient.utils import *

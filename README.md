@@ -78,7 +78,7 @@ gcloud builds submit .
 ```
 ### Deploy kubernetes resources into GKE cluster
 Update the following line in llama2-gke-deploy.yaml file, with your model repository URI in cloud storage:
- 
+
 args: ["tritonserver", "--model-store=gs://triton-inference-llm-repos/model_repository"
 Execute the command to deploy inference deployment in GKE, update the HF_TOKEN values
 
@@ -101,7 +101,30 @@ python3 client.py
 If everything runs smoothly, there will be a results.txt file generated, you may check the contents of 
 
 ### Note for vLLM:
-vLLM has been tested out, it may have better performance for small models. But it uses 16bit by default, does not support Quardzation with 8bit yet( which supported by the python_backend one). Through the tests, vLLM can support T4 GPU for Llama2 7b model, but not the L4 GPU for Llama 2 13b model due to lack of 8bit( load_in_8bit= True)
+vLLM has been tested out, with faster performance, with a little bit different setup
+#### Update deployment file
+Update llama2-gke-deploy.yaml, container image: nvcr.io/nvidia/tritonserver:23.10-vllm-python-py3
+#### Upload model directory to Cloud Storage:
+gsutil cp model_repository/vllm -r gs://your-bucket-name/model_repository/vllm
+
+### Test out the batch inference:
+Run following command to build testing client container to test llama 2 batch inference:
+
+```
+cd vllm/client
+gcloud builds submit .
+
+```
+kubectl run -it -n triton --image us-east1-docker.pkg.dev/rick-vertex-ai/triton-llm/vllm-client bash 
+```
+
+Once you in the container, update the client.py with the endpoint with the Service IP of generated. 
+Then run the following command inside the testing container:
+```
+python3 client.py
+```
+If everything runs smoothly, there will be a results.txt file generated, you may check the contents
+
 
 
 
